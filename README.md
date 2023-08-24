@@ -4,9 +4,9 @@
 
 This repository describes the project assignment that students are required to deliver as part of the assessment of the course.
 
-This project will have a certain **degree of freedom**. The student has two options.
-1. Develop a web-app that meets all the requirements (described below) by addressing the exact same problem described in this repository and implementing the solution for this problem;
-2. Develop a web-app that meets all the requirements (described below) by addressing a **different business or problem**, to be chosen by the student. As long as it contains all the required features, the submission will be accepted.
+This project will require the student to **fill up missing code** on a webapp written in golang.
+
+This web-app allows clients to Create, Update, Delete or Read trades. Students are required to complete the CRUD pattern on the webapp.
 
 ### The suggested problem
 
@@ -211,7 +211,7 @@ Some decisions
 
 You can implement extra endpoints for USER such as `PATCH` and `DELETE` in order to make your web-app more robust.
 
-#### 7. Middlewares
+#### 7. Extra: Middlewares
 
 ##### 7.1 Recover middleware
 
@@ -264,11 +264,11 @@ The header should be called `authorization`.
 Some decisions:
 * In case of a bad JWT, you should return a 401 - Unauthorized status code as well as the error message.
 
-#### 7.4 Extra middlewares
+#### 7.4 Other middlewares
 
 Feel free to explore and add new middlewares to your application. There are some common ones, such as [CORS middleware](https://www.stackhawk.com/blog/configuring-cors-for-go/).
 
-### 8. Moving averages - The business logic
+### 8. Extra: Implementing the business logic (Moving averages)
 
 In this requirement we implement the business logic of our application.
 
@@ -356,24 +356,18 @@ This is a checklist that will guide the assessment of the final project. Every f
 - [ ] CRUD for Trades (GET, POST, PATCH, DELETE)
 - [ ] POST endpoint for User
 - [ ] POST endpoint for Login
+
+Extra points if you implement the logic and some middlewares:
 - [ ] GET endpoint for Candles
 - [ ] GET endpoint for Moving Average
 - [ ] MIDDLEWARES: Logging, Authorization, Recovery.
 
-#### 10.A Checklist alternative
-
-If you decide to implement a web server to **tackle a different problem**, this is the requirement list of your web-app:
-
-- [ ] CRUD for any Entity (GET, POST, PATCH/UPDATE, DELETE)
-- [ ] POST endpoint for User
-- [ ] POST endpoint for Login
-- [ ] ANY endpoint that implements one (or more) **business logic** for your webapp.
-- [ ] MIDDLEWARES: Logging, Authorization, Recovery.
-
-### 11. The database
+### 10. The database
 
 We will be using PostgreSQL as our main database. We won't be learning it deeply, but the student is permitted to choose any Database for their project.
 
 ### Assessment
 
-:warning: **The project should be submitted as a Pull Request to this repository. The instructor will be evaluating the courseworks through code review.**
+:warning: **The project should be submitted as a compressed file (zip/tar/rar) on Microsoft Teams. It can be done in groups of up to 5 people. Only one submission per group.**
+
+:warning: **The names of the group members should be inside the code in commentary on the main module.**
