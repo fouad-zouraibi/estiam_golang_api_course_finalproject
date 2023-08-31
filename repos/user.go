@@ -24,6 +24,7 @@ func NewUserRepository(conn *pgxpool.Pool) UserRepository {
 }
 
 /*REMOVE THIS METHOD*/
+/*REMOVE THIS METHOD*/
 const SQL_GET_USER = `
 		select 
 			u.id,
@@ -58,8 +59,13 @@ func (repo *userRepositoryImpl) GetUser(c context.Context, userId string) (*type
 }
 
 /*IMPLEMENT THIS METHOD*/
-const SQL_INSERT_USER = `?`
+const SQL_INSERT_USER = `
+	INSERT INTO "user" (id, username, pass) VALUES ($1, $2, $3);`
 
 func (repo *userRepositoryImpl) CreateUser(c context.Context, user *types.User) error {
+	_, err := repo.dbConn.Exec(c, SQL_INSERT_USER, user.Id, user.Username, user.Password)
+	if err != nil {
+		return fmt.Errorf("error during query to create user: %v", err)
+	}
 	return nil
 }

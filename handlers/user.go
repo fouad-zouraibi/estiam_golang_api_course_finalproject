@@ -5,38 +5,31 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/phramos07/finalproject/services"
+	"github.com/phramos07/finalproject/types"
 )
 
-type UserHandler struct {
+type UserHandler interface {
+	Create(echo.Context) error
+}
+
+type userHandler struct {
 	userService services.UserService
 }
 
-func NewUserHandler(service services.UserService) *UserHandler {
-	return &UserHandler{
-		userService: service,
-	}
+func NewUserHandler(userService services.UserService) UserHandler {
+	return &userHandler{userService: userService}
 }
 
-/*REMOVE THIS ENDPOINT*/
-func (h *UserHandler) Get(ctx echo.Context) error {
-	id := ctx.Param("id")
-
-	user, err := h.userService.GetUser(ctx.Request().Context(), id)
-	if err != nil {
-		ctx.NoContent(http.StatusInternalServerError)
-		return nil
+func (h *userHandler) Create(c echo.Context) error {
+	user := new(types.User)
+	if err := c.Bind(user); err != nil {
+		return err
 	}
 
-	if user == nil {
-		ctx.JSON(http.StatusNotFound, map[string]interface{}{"message": "user not found"})
-		return nil
+	// Call the service to create a new user
+	if err := h.userService.CreateNewUser(c.Request().Context(), user); err != nil {
+		return err
 	}
 
-	ctx.JSON(http.StatusOK, user)
-	return nil
-}
-
-/*IMPLEMENT THIS ENDPOINT*/
-func (h *UserHandler) Post(ctx echo.Context) error {
-	return nil
+	return c.JSON(http.StatusCreated, user)
 }

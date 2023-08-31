@@ -1,7 +1,11 @@
 package main
 
-// this is a test to test commits with ssh
-
+/*
+This project was created by :
+    Fouad ZOURAIBI,
+    Taha GARGOURI,
+    Haider JUOINI.
+*/
 import (
 	"fmt"
 
@@ -24,10 +28,12 @@ func main() {
 	server.GET("/live", healthHandler.IsAlive)
 
 	// REMOVE THAT ENDPOINT
-	userHandler := handlers.NewUserHandler(userService)
-	server.GET("/users/:id", userHandler.Get)
+	// userHandler := handlers.NewUserHandler(userService)
+	// server.GET("/users/:id", userHandler.Get)
 
-	// TODO: Register a new endpoint for POST user
+	// Register a new endpoint for POST user
+	userHandler := handlers.NewUserHandler(userService)
+	server.POST("/users", userHandler.Create) // Register the handler function for POST /users
 
 	if err := server.Start(":8080"); err != nil {
 		fmt.Println(err)
